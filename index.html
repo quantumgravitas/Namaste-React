@@ -6,8 +6,18 @@
   <title>Namaste React</title>
 </head>
 <body>
-  <div id="root">
-    <h1>Hello World!</h1>
+  <div id="root" class="js-root">
+    
   </div>
+  <script>
+   const heading= document.createElement('h1');
+   heading.innerHTML='Hello world from JavaScript!';
+
+  //  const root=document.getElementById('root');
+  //  root.appendChild(heading);
+
+   const root=document.querySelector('.js-root');
+   root.appendChild(heading);
+  </script>
 </body>
 </html>
