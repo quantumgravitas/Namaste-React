@@ -21,8 +21,10 @@ console.log(typeof root);
   </div>
 </div>
 */
+/*
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 const parent=React.createElement('div',{id:"parent"},[
  React.createElement("div",{id:"child1"},[
     React.createElement("h1",{},"Welcome to Namaste React"),
@@ -39,3 +41,24 @@ const parent=React.createElement('div',{id:"parent"},[
 const root=ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(parent);
+*/
+import React from "react";
+import ReactDOM from "react-dom";
+
+const heading=React.createElement("h1",{id:"heading"},"Namaste React By Mayur");
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+
+const jsxHeading=(
+                  <h1 id="jsxheading">
+                    Namaste React by JSX
+                    </h1>);
+//we can write jsx on multiple lines only when we write it in the paranthesis
+
+console.log(heading);
+
+console.log(jsxHeading);
+
+root.render(heading);
+
+root.render(jsxHeading);
