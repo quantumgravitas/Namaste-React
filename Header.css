@@ -1,0 +1,42 @@
+.header
+{
+  display:flex;
+  align-items:center ;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: black;
+}
+.search-bar
+{
+  flex: 1;
+  max-width: 850px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  
+}
+.searchInput
+{
+  flex: 1;
+  width: 0;
+  font-size: 16px;
+  height: 38px;
+  padding-left: 15px;
+  border: none;
+  border-radius: 4px;
+}
+.mylogo
+{
+  width:180px;
+}
+.mylogo{
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .amazon-header-left-section {
+    width: unset;
+  }
+}
