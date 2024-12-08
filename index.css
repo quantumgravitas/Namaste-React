@@ -88,3 +88,14 @@
   cursor:pointer;
   border:none;
 }
+.login-button{
+  padding:0 30px;
+  font-family:Arial;
+  font-size:18px;
+  font-weight:bold;
+  color:white;
+  background-color: green;
+  border:none;
+  cursor:pointer;
+  border-radius: 10px;
+}
