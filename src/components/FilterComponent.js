@@ -1,5 +1,4 @@
-import restaurantList from "../../utils/mockData" ;
-const FilterComponent=(search)=>{
+const FilterComponent=(search,restaurantList)=>{
    return  restaurantList.filter((restaurant)=>{
        let matchingCuisine=false ;
        const{cuisines}=restaurant.info ;

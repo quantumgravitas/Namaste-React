@@ -1,4 +1,5 @@
 import { LOGO_URL } from "../../utils/constants";
+import Body from "./Body";
 const Header=()=>{
   return(
     <div className="header">

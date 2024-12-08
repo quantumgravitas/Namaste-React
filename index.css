@@ -1,0 +1,90 @@
+.header{
+  display:flex;
+  justify-content: space-between;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  align-items: center;
+}
+.logo{
+  width:200px;
+}
+.nav-items >ul{
+  display:flex ;
+  list-style-type: none;
+  font-size:20px;
+  margin-left:20px;
+  margin-right:20px;
+}
+.nav-items>ul>li{
+  padding:10px;
+  margin:10px;
+}
+
+.restaurant-container,.shimmer-container
+{
+  display:flex;
+  flex-wrap:wrap;
+}
+.res-card,.shimmer-card
+{ 
+  width:355px;
+  margin:8px 5px ;
+  padding:5px;
+}
+  
+.res-card{
+  background-color: rgb(228, 226, 226);
+}
+.shimmer-card{
+  background-color:rgb(248, 244, 244);
+  height:400px;
+}
+.res-card:hover{
+  border:1px solid black ;
+  cursor:pointer;
+}
+.res-image
+{
+  width:100%;
+  overflow-clip-margin: content-box;
+  height:300px;
+  overflow: clip;
+}
+.filter-button
+{
+  margin:10px;
+  font-family:Arial;
+  font-size:16px;
+  color:white;
+  cursor:pointer;
+  background-color: green;
+  border:none;
+  padding:10px;
+  font-weight:bold;
+  border-radius:4px;
+}
+.search{
+  margin: 10px;
+  height:50px;
+  width:500px;
+  display:flex;
+  align-items: center;
+}
+.search-bar
+{
+  width:350px;
+  padding:10px;
+  font-family:Arial;
+  font-size:16px;
+}
+.search-button
+{
+  font-size:16px;
+  padding:12px;
+  background-color: green;
+  font-family:arial;
+  color:white;
+  cursor:pointer;
+  border:none;
+}
