@@ -18,33 +18,30 @@ const Body=()=>{
   },[]);
   const fetchData=async()=>{
     
-    const data= await fetch(API_URL) ;
+     const data= await fetch(API_URL) ;
 
-    const json= await data.json();
-
-    setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+     const json= await data.json();
     
-    setFilterListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-   }
- 
-  if(filterListOfRestaurants.length===0)
-  {
-    return <Shimmer/>
+     setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    
+     setFilterListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
   }
-  return (
+
+  return filterListOfRestaurants.length===0?(<Shimmer/>): (
+ 
+
     <div className="body">
       <div className="filter">
-        <button onClick={()=>{
-          const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>=4.5)
-          setFilterListOfRestaurants(filteredList);
-        }} className="filter-button">
-         Show Top Rated Restaurants 
-        </button> 
-      </div>
+          <button onClick={()=>{
+            const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>=4.5)
+            setFilterListOfRestaurants(filteredList);}} className="filter-button">
+            Show Top Rated Restaurants 
+          </button> 
       <div className="search">
-       <input type="text" className="search-bar js-search-bar"
-       onChange={(event)=>setSearchTerm(event.target.value)}
-       onKeyDown={(event)=>{
+        <input type="text" className="search-bar js-search-bar"
+        value={searchTerm}
+        onChange={(event)=>setSearchTerm(event.target.value)}
+        onKeyDown={(event)=>{
          if(event.key==='Enter')
          {
            const list=FilterComponent(searchTerm,listOfRestaurants);
@@ -56,11 +53,16 @@ const Body=()=>{
          setFilterListOfRestaurants(filterList);
        }}>Search</button>
       </div>
+      </div> 
       <div className="restaurant-container">
         {filterListOfRestaurants.map((restaurant)=>(<RestaurantCard key={restaurant.info.id}resData={restaurant}/>))};
       </div>
+      
     </div>
   )
 }
-
 export default Body;
+    
+
+ 
+  
