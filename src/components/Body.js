@@ -28,8 +28,6 @@ const Body=()=>{
   }
 
   return filterListOfRestaurants.length===0?(<Shimmer/>): (
- 
-
     <div className="body">
       <div className="filter">
           <button onClick={()=>{
@@ -62,6 +60,8 @@ const Body=()=>{
   )
 }
 export default Body;
+ 
+
     
 
  
