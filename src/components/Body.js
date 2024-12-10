@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import FilterComponent from "./FilterComponent";
 import Shimmer from "./Shimmer";
 import { API_URL } from "../../utils/constants";
+import { Link } from "react-router-dom";
 const Body=()=>{
   //Array destructuring
   //const arr=useState(restaurantList)
@@ -22,9 +23,9 @@ const Body=()=>{
 
      const json= await data.json();
     
-     setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+     setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     
-     setFilterListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+     setFilterListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
 
   return filterListOfRestaurants.length===0?(<Shimmer/>): (
@@ -53,7 +54,7 @@ const Body=()=>{
       </div>
       </div> 
       <div className="restaurant-container">
-        {filterListOfRestaurants.map((restaurant)=>(<RestaurantCard key={restaurant.info.id}resData={restaurant}/>))};
+        {filterListOfRestaurants.map((restaurant)=>(<Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id} className="link-no-underline"><RestaurantCard resData={restaurant}/></Link>))};
       </div>
       
     </div>
