@@ -26,11 +26,16 @@ const RestaurantMenu=()=>{
     const {itemCards}=resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card ;
     return (
     <div className="restaurant-menu">
+      <div className="restaurant-title">
        <h1>{name}</h1>
+       <div className="rating-string">
        <h2>{costForTwoMessage}</h2>
-       <h2>{cuisines.join(",")}</h2>
        <h2>{avgRatingString}</h2>
        <h2>{totalRatingsString}</h2>
+       </div>
+       <h2>{cuisines.join(",")}</h2>
+       
+       </div>
        <ul>
          {itemCards.map((item)=>
            <li key={item.card.info.id} className="menu-item">
