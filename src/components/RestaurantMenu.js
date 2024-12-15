@@ -1,37 +1,27 @@
-import {useEffect,useState} from "react";
-import { MENU_URL,MENUIMAGE_URL } from "../../utils/constants";
+import { MENUIMAGE_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu=()=>{
-
-  const[resInfo,setResInfo]=useState(null);
+  
   const {restaurantId}=useParams();
-
-  useEffect(()=>{
-    fetchRestaurantInfo();
-  },[]);
+  
+  const resInfo=useRestaurantMenu(restaurantId);
  
-  const fetchRestaurantInfo=async()=>{
-           const data= await fetch(MENU_URL+restaurantId);
-          const json= await data.json();
-          setResInfo(json.data);
-  }
+  if(resInfo===null) return <Shimmer/>
+ 
+  const {name,costForTwoMessage,cuisines,avgRatingString,totalRatingsString}=resInfo.cards[2].card.card.info ;
+ 
+  const {itemCards}=resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card ;
 
-   if(resInfo===null)
-    {
-      return <Shimmer/>
-    }
-    const {name,costForTwoMessage,cuisines,avgRatingString,totalRatingsString}=resInfo.cards[2].card.card.info ;
-
-    const {itemCards}=resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card ;
     return (
     <div className="restaurant-menu">
       <div className="restaurant-title">
-       <h1>{name}</h1>
+        <h1>{name}</h1>
        <div className="rating-string">
-       <h2>{costForTwoMessage}</h2>
-       <h2>{avgRatingString}</h2>
-       <h2>{totalRatingsString}</h2>
+        <h2>{costForTwoMessage}</h2>
+        <h2>{avgRatingString}</h2>
+        <h2>{totalRatingsString}</h2>
        </div>
        <h2>{cuisines.join(",")}</h2>
        
