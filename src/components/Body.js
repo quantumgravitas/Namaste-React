@@ -28,14 +28,17 @@ const Body=()=>{
    
    return filterListOfRestaurants.length===0?(<Shimmer/>): (
      <div className="body">
-       <div className="filter">
-           <button onClick={()=>{
-             const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>=4.5)
-             setFilterListOfRestaurants(filteredList);}} className="filter-button">
-             Show Top Rated Restaurants 
-           </button> 
-       <div className="search">
-         <input type="text" className="search-bar js-search-bar"
+       <div className="flex m-4 items-center">
+           <div>
+              <button onClick={()=>{
+                  const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>=4.5)
+                  setFilterListOfRestaurants(filteredList);}} className="bg-green-700 text-white cursor-pointer font-semibold px-4 py-4 text-md rounded-xl">
+                  Show Top Rated Restaurants 
+              </button>
+           </div> 
+       <div className="flex items-center">
+        <div>
+         <input type="text" className="border border-black ml-4 px-8 py-2"
          value={searchTerm}
          onChange={(event)=>setSearchTerm(event.target.value)}
          onKeyDown={(event)=>{
@@ -44,12 +47,15 @@ const Body=()=>{
             setFilterListOfRestaurants(FilterComponent(searchTerm,listOfRestaurants)); 
           }
         }}/>
-        <button className="search-button" onClick={()=>{
+        </div>
+        <div>
+        <button className="bg-green-700 text-white py-2 px-2 text-base" onClick={()=>{
           setFilterListOfRestaurants(FilterComponent(searchTerm,listOfRestaurants));
         }}>Search</button>
+        </div>
        </div>
        </div> 
-       <div className="restaurant-container">
+       <div className="flex flex-wrap p-0">
          {filterListOfRestaurants.map((restaurant)=>(<Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id} className="link-no-underline"><RestaurantCard resData={restaurant}/></Link>))};
        </div>
        
