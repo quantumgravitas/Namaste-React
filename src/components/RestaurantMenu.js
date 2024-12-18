@@ -2,44 +2,53 @@ import { MENUIMAGE_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import{useState} from "react";
 const RestaurantMenu=()=>{
   
   const {restaurantId}=useParams();
   
   const resInfo=useRestaurantMenu(restaurantId);
- 
+  
+  const[showIndex,setShowIndex]=useState(null);
+
   if(resInfo===null) return <Shimmer/>
  
-  const {name,costForTwoMessage,cuisines,avgRatingString,totalRatingsString}=resInfo.cards[2].card.card.info ;
- 
+  const {name,costForTwoMessage,avgRatingString,totalRatingsString,locality,sla}=resInfo.cards[2].card.card.info ;
+  
   const {itemCards}=resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card ;
-
+  
+  const itemCategories=resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>{
+    return  c?.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  })
+   
     return (
-    <div className="restaurant-menu">
-      <div className="restaurant-title">
-        <h1>{name}</h1>
-       <div className="rating-string">
-        <h2>{costForTwoMessage}</h2>
-        <h2>{avgRatingString}</h2>
-        <h2>{totalRatingsString}</h2>
-       </div>
-       <h2>{cuisines.join(",")}</h2>
-       
-       </div>
-       <ul>
-         {itemCards.map((item)=>
-           <li key={item.card.info.id} className="menu-item">
-              <div className="menu-content">
-                <h3 className="menu-title">{item.card.info.name}</h3>  
-                <p className="menu-price">{item.card.info.price/100} Rupees</p>
-                <p className="menu-description">{item.card.info.description}</p>
-                <button className="menu-button">ADD</button>
+    <div className="text-center">
+       <div> 
+        <h1 className="font-extrabold text-2xl my-4">{name}</h1>
+        <div>
+          <div>
+              <div className="border-black">  
+                <h2>{avgRatingString}</h2>
+                <h2>{totalRatingsString}</h2>
+                <h2>{costForTwoMessage}</h2>
+              </div>
+          <h2>Outlet:{locality}</h2>
+          <h3>{sla.slaString}</h3>
           </div>
-          <div className="menu-image">
-          <img src={MENUIMAGE_URL+item.card.info.imageId}/>
-          </div>   
-         </li> )}
-       </ul>
+        </div>
+         
+      </div> 
+      {itemCategories.map((category,index)=>
+      <RestaurantCategory key={category.card.card.title}
+      data={category?.card?.card} 
+      showItems={ index===showIndex ? true : false}
+      setShowIndex={()=> setShowIndex(index===showIndex?null:index)}/>)} 
+      {console.log("menu rendered")}    
+          
+      
+       
+      
     </div>
   )
           
