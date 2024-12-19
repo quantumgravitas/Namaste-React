@@ -9,7 +9,7 @@ const useListOfRestaurants=()=>{
        const data=await fetch(API_URL);
        const json=await data.json();
        setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-       console.log("fetch Data");
+       
    }
   return listOfRestaurants ;
 }
