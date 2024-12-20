@@ -8,6 +8,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
 import UserContext from "./utils/UserContext";
 import { SearchProvider } from "./utils/SearchContext";
+import { ParentComponent } from "./components/ParentComponent";
 const AppLayout=()=>{
   const [userName,setUserName]=useState("");
   useEffect(()=>{
@@ -52,6 +53,10 @@ const appRouter=createBrowserRouter([{
       path:"/restaurants/:restaurantId",
       element: <RestaurantMenu />
     },
+    {
+      path:"/parent",
+      element: <ParentComponent/>
+    }
     
   ],
   errorElement: <Error/>
