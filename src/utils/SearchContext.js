@@ -6,8 +6,9 @@ const { createContext,useState } = require("react");
 
   const [searchTerm,setSearchTerm]=useState();
   
+  const [filterListOfRestaurants,setFilterListOfRestaurants]=useState([]);
   return(
-    <SearchContext.Provider value={{searchTerm,setSearchTerm}}>
+    <SearchContext.Provider value={{searchTerm,setSearchTerm,filterListOfRestaurants,setFilterListOfRestaurants}}>
        {children}
     </SearchContext.Provider>
   )

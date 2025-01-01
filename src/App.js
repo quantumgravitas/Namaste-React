@@ -9,6 +9,9 @@ import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
 import UserContext from "./utils/UserContext";
 import { SearchProvider } from "./utils/SearchContext";
 import { ParentComponent } from "./components/ParentComponent";
+import {Provider} from "react-redux";
+import appStore from "./utils/AppStore";
+import Cart from "./components/Cart";
 const AppLayout=()=>{
   const [userName,setUserName]=useState("");
   useEffect(()=>{
@@ -19,6 +22,7 @@ const AppLayout=()=>{
   },[])
   
   return(
+    <Provider store={appStore}>
     <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
       <SearchProvider>  
         <div className="app-layout">
@@ -27,6 +31,7 @@ const AppLayout=()=>{
         </div>
       </SearchProvider>
     </UserContext.Provider>
+    </Provider>
   )
 }
       
@@ -56,6 +61,10 @@ const appRouter=createBrowserRouter([{
     {
       path:"/parent",
       element: <ParentComponent/>
+    },
+    {
+      path:"/cart",
+      element: <Cart/>
     }
     
   ],

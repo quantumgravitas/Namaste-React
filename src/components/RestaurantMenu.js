@@ -24,35 +24,46 @@ const RestaurantMenu=()=>{
    
     return (
     <div className="text-center">
-       <div> 
-        <h1 className="font-extrabold text-2xl my-4">{name}</h1>
-        <div>
-          <div>
-              <div className="border-black">  
-                <h2>{avgRatingString}</h2>
-                <h2>{totalRatingsString}</h2>
-                <h2>{costForTwoMessage}</h2>
+       <div>        
+          <h1 className="font-extrabold text-2xl my-4 shadow-slate-400">{name}</h1>
+          <div className="border border-gray-300 w-[750px] m-auto p-4 rounded-xl">
+              <div className="flex justify-center">  
+              <h2 className="mx-3 font-bold text-md">{avgRatingString} ({totalRatingsString})</h2>
+              <h2 className="mx-2 font-bold text-lg">{costForTwoMessage}</h2>
               </div>
-          <h2>Outlet:{locality}</h2>
-          <h3>{sla.slaString}</h3>
+              <div>
+                <div className="flex justify-center my-2">
+                <p className="mx-2 font-bold text-md">Outlet</p>
+                <p className="font-semibold text-md text-gray-400">{locality}</p>
+                </div>
+                <h3 className="text-sm font-semibold">{sla.slaString}</h3>
+              </div>
           </div>
         </div>
-         
-      </div> 
-      {itemCategories.map((category,index)=>
-      <RestaurantCategory key={category.card.card.title}
-      data={category?.card?.card} 
-      showItems={ index===showIndex ? true : false}
-      setShowIndex={()=> setShowIndex(index===showIndex?null:index)}/>)} 
-      {console.log("menu rendered")}    
-          
-      
-       
-      
+ 
+        {itemCategories.map((category,index)=>
+        <RestaurantCategory key={category.card.card.title}
+        data={category?.card?.card} 
+        showItems={ index===showIndex ? true : false}
+        setShowIndex={()=> setShowIndex(index===showIndex?null:index)}/>)} 
+        {console.log("menu rendered")}    
     </div>
   )
           
 }
+       
+      
+             
+         
+        
+         
+         
+                
+
+          
+      
+       
+      
 export default RestaurantMenu ;
       
         

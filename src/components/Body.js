@@ -8,12 +8,12 @@ import useListOfRestaurants from "../utils/useListOfRestaurants";
 import UserContext from "../utils/UserContext";
 import { SearchContext } from "../utils/SearchContext";
 const Body=()=>{
-  const[filterListOfRestaurants,setFilterListOfRestaurants]=useState([]); 
+ // const[filterListOfRestaurants,setFilterListOfRestaurants]=useState([]); 
   const listOfRestaurants=useListOfRestaurants();  
   
   const PromotedRestaurantCard = WithPromotedResCard(RestaurantCard);
  
-  const {searchTerm} =useContext(SearchContext); 
+  const {searchTerm,filterListOfRestaurants,setFilterListOfRestaurants} =useContext(SearchContext); 
 
   const onlineStatus=useOnlineStatus();
   
@@ -24,20 +24,30 @@ const Body=()=>{
   
   useEffect(()=>{
      setFilterListOfRestaurants(listOfRestaurants)
-  },[listOfRestaurants])
+  },[listOfRestaurants,setFilterListOfRestaurants])
 
   useEffect(()=>{
-    setFilterListOfRestaurants(FilterComponent(searchTerm,listOfRestaurants))
-  },[searchTerm])
-  
+    if(searchTerm)
+    {
+      setFilterListOfRestaurants(FilterComponent(searchTerm,listOfRestaurants))
+    }else{
+       setFilterListOfRestaurants(listOfRestaurants)
+    }
+      
+  },[searchTerm,listOfRestaurants,setFilterListOfRestaurants])
+
+  console.log(filterListOfRestaurants);
+
+  const clickHandle=()=>{
+    const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>4.5);
+    setFilterListOfRestaurants(filteredList) ;
+  }
   return filterListOfRestaurants.length===0?(<Shimmer/>): (
 
     <div className="body">
       <div className="flex m-4 items-center">
           <div>
-             <button onClick={()=>{
-                 const filteredList=listOfRestaurants.filter((restaurant)=> restaurant.info.avgRating>=4.5)
-                 setFilterListOfRestaurants(filteredList);}} className="bg-green-700 text-white cursor-pointer font-semibold px-4 py-4 text-md rounded-xl">
+             <button onClick={clickHandle} className="bg-green-700 text-white cursor-pointer font-semibold px-4 py-4 text-md rounded-xl">
                  Show Top Rated Restaurants 
              </button>
           </div> 

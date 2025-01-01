@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import { SearchContext } from "../utils/SearchContext";
+import { useSelector } from "react-redux";
 const Header=()=>{
   const [btnName,setBtnName]=useState("Login");
 
@@ -15,13 +16,15 @@ const Header=()=>{
 
   const[inputValue,setInputValue]=useState("");
 
+  const cartItems=useSelector((store)=> store.cart.items)
+
   const handleInputChange=(e)=>{
     setInputValue(e.target.value);
   }
   
   const clickHandler=()=>{
     setSearchTerm(inputValue);
-    
+    console.log("button clicked");
   }
   const keyHandler=(event)=>{
     
@@ -52,7 +55,7 @@ const Header=()=>{
             <li className="px-4"><Link to={"/"}>Home</Link></li>
             <li className="px-4"><Link to={"/about"}>About Us</Link></li>
             <li className="px-4"><Link to={"/contact"}>Contact Us</Link></li>
-            <li className="px-4">Cart</li>
+            <li className="px-4 font-semibold text-xl"><Link to={"/cart"}>Cart-({cartItems.length})items</Link></li>
             <button onClick={()=>{btnName==='Login'?setBtnName("Logout"):setBtnName('Login')}}>{btnName}</button>
             <li className="px-4">{loggedInUser}</li>
           </ul>
