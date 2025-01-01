@@ -24,7 +24,7 @@ const Header=()=>{
   
   const clickHandler=()=>{
     setSearchTerm(inputValue);
-    console.log("button clicked");
+    
   }
   const keyHandler=(event)=>{
     
@@ -43,7 +43,7 @@ const Header=()=>{
            </Link>
         </div>
         <div className="mx-2 py-10"> 
-         <input type="text" className="border-2 mx-1 me-0 px-8 py-2" value={inputValue} onChange={handleInputChange} onKeyDown={keyHandler}/>
+         <input type="text" className="border-2 mx-1 me-0 px-8 py-2"  onChange={handleInputChange} onKeyDown={keyHandler}/>
          <button className="bg-black text-white m-0 py-3 px-2 text-base font-bold" 
           onClick={clickHandler}>
           Search

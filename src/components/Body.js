@@ -1,14 +1,16 @@
-import { useState,useEffect,useContext,createContext } from "react";
+import {useEffect,useContext} from "react";
 import RestaurantCard ,{WithPromotedResCard}from "./RestaurantCard";
 import FilterComponent from "./FilterComponent";
 import Shimmer from "./Shimmer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useListOfRestaurants from "../utils/useListOfRestaurants";
 import UserContext from "../utils/UserContext";
 import { SearchContext } from "../utils/SearchContext";
+
 const Body=()=>{
- // const[filterListOfRestaurants,setFilterListOfRestaurants]=useState([]); 
+  const location=useLocation();
+
   const listOfRestaurants=useListOfRestaurants();  
   
   const PromotedRestaurantCard = WithPromotedResCard(RestaurantCard);
@@ -23,8 +25,12 @@ const Body=()=>{
   const {setUserName,loggedInUser}=useContext(UserContext);
   
   useEffect(()=>{
-     setFilterListOfRestaurants(listOfRestaurants)
-  },[listOfRestaurants,setFilterListOfRestaurants])
+    if(location.pathname==='/')
+    {
+      setFilterListOfRestaurants(listOfRestaurants)
+    }
+     
+  },[location,listOfRestaurants,setFilterListOfRestaurants])
 
   useEffect(()=>{
     if(searchTerm)
@@ -47,7 +53,7 @@ const Body=()=>{
     <div className="body">
       <div className="flex m-4 items-center">
           <div>
-             <button onClick={clickHandle} className="bg-green-700 text-white cursor-pointer font-semibold px-4 py-4 text-md rounded-xl">
+             <button onClick={clickHandle} className="bg-green-700 text-white cursor-pointer font-semibold px-4 py-4 text-md text-lg hover:shadow-xl rounded-xl">
                  Show Top Rated Restaurants 
              </button>
           </div> 
